@@ -3,8 +3,8 @@
     <head>
         <title>PiggyVest| Dashboard</title>
         <link rel="stylesheet" type="text/css" href="style.css" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="shortcut icon" href="images/fav-icon.png" type="image/x-icon">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <div id="logo">
@@ -28,7 +28,27 @@
                 <label for="referral">Referrer Phone or Promo Code (Optional)</label>
                 <input type="text" id="referral" name="referral" placeholder="Referrer Phone Or Code" />
                 <label for="info">How Did You Hear About Us? (Optional)</label>
-                <input type="text" id="info" name="info" placeholder="Click to Select" />
+                <div class="custom-select-wrapper">
+                    <div class="custom-select">
+                        <div class="custom-select__trigger">
+                            <span>Click to select</span>
+                            <div class="arrow"></div>
+                        </div>
+                        <div class="custom-options">
+                            <span class="custom-option selected" data-value="click">Click to select</span>
+                            <span class="custom-option" data-value="facebook">Facebook</span>
+                            <span class="custom-option" data-value="twitter">Twitter</span>
+                            <span class="custom-option" data-value="instagram">Instagram</span>
+                            <span class="custom-option" data-value="family">Family/Friend/Coworker referral</span>
+                            <span class="custom-option" data-value="googles">Google search</span>
+                            <span class="custom-option" data-value="playstore">Google playstore</span>
+                            <span class="custom-option" data-value="online">Online blog</span>
+                            <span class="custom-option" data-value="local">Local newspaper</span>
+                            <span class="custom-option" data-value="event">At an event</span>
+                            <span class="custom-option" data-value="other">Other</span>
+                        </div>
+                    </div>
+                </div>
                 <input type="button" name="next" class="next action-button" value="CREATE ACCOUNT" />
             </fieldset>
         </form>
@@ -36,4 +56,24 @@
             <p>Already have an account? Log in</p>
         </div>
     </body>
+    <script>
+        document.querySelector('.custom-select-wrapper').addEventListener('click', function() {
+            this.querySelector('.custom-select').classList.toggle('open');
+        })
+        for (const option of document.querySelectorAll(".custom-option")) {
+            option.addEventListener('click', function() {
+            if (!this.classList.contains('selected')) {
+                this.parentNode.querySelector('.custom-option.selected').classList.remove('selected');
+                this.classList.add('selected');
+                this.closest('.custom-select').querySelector('.custom-select__trigger span').textContent = this.textContent;
+            }
+        })
+        window.addEventListener('click', function(e) {
+        const select = document.querySelector('.custom-select')
+        if (!select.contains(e.target)) {
+            select.classList.remove('open');
+        }
+        });
+        }
+    </script>
 </html>
